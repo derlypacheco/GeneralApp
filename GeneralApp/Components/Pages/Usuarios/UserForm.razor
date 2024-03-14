@@ -1,0 +1,75 @@
+﻿@using GeneralApp.Components.Layout
+@using GeneralApp.Models
+@inject Radzen.DialogService DialogService
+
+<EditForm Model="user">
+    <div class="row">
+        <div class="col my-2">
+            <label class="form-label">Nombre</label>
+            <InputText class="form-control" @bind-Value=user.Name />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col my-2">
+            <label class="form-label">Apellido</label>
+            <InputText class="form-control" @bind-Value=user.Lastname />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col my-2">
+            <label class="form-label">Usuario</label>
+            <InputText class="form-control" @bind-Value=user.Username />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col my-2">
+            <label class="form-label">Password</label>
+            <RadzenPassword class="form-control" Value="@Password" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col my-2">
+            <label class="form-label">Correo</label>
+            <InputText class="form-control" @bind-Value=user.Email />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col my-2">
+            <label class="form-label">Teléfono</label>
+            <InputText class="form-control" @bind-Value=user.PhoneNumber />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col my-2">
+            <button class="btn btn-success" @onclick="@(()=>SaveUser())">
+                Guardar
+            </button>
+        </div>
+    </div>
+
+</EditForm>
+
+@code {
+    [Parameter] public User user { get; set; }
+    public string? Password { get; set; }
+
+    public async Task SaveUser()
+    {
+        if (!String.IsNullOrEmpty(Password))
+        {
+            user.Password = Password;
+            // Llamar al metodo de encriptar 
+            // code...
+        }
+        // Procedimiento para almacenar el usuario
+        // code...
+        DialogService.Close();
+        await DialogService.Alert("Registro editado correctamente", "Editado");
+    }
+}

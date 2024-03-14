@@ -1,10 +1,17 @@
 using GeneralApp.Components;
+using GeneralApp.Repositories;
+using Radzen;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+builder.Services.AddScoped<DialogService>();
+builder.Services.AddScoped<NotificationService>();
+builder.Services.AddRadzenComponents();
+builder.Services.AddTransient<UserRepositorie>();
 
 var app = builder.Build();
 

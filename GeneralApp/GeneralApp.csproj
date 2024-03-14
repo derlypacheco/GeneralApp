@@ -22,8 +22,4 @@
     <PackageReference Include="Radzen.Blazor" Version="4.26.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Components\Pages\Usuarios\" />
-  </ItemGroup>
-
 </Project>

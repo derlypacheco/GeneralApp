@@ -1,0 +1,54 @@
+﻿@page "/Usuarios"
+@using GeneralApp.Models
+@inject Radzen.DialogService DialogService
+@inject UserRepositorie userRepo
+@rendermode InteractiveServer
+
+<PageTitle>Listado de usuarios</PageTitle>
+
+<div class="row">
+    <div class="col">
+        <div class="card shadow-sm my-3 rounded ">
+            <div class="card-body">
+                <div class="m-1 h3 text-muted">
+                    <i class="fa-solid fa-users me-3" aria-hidden="true"></i>
+                    Listado de usuarios
+                    <RadzenButton Icon="@(Icons.SetIcon("fa-circle-plus"))" 
+                                  ButtonType="ButtonType.Button" 
+                                  Click="@(()=>AddUser())"
+                                  ButtonStyle="ButtonStyle.Dark" class="float-end" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xxl-12">
+        <div class="card shadow-sm mb-3 rounded">
+            <div class="card-body">
+                <RadzenDataGrid Data="@listUsers" TItem="User" AllowSorting="true" AllowFiltering="true" AllowPaging="true" AllowGrouping="true"
+                                PageSizeOptions="@pageSizeOptions" Responsive="false" FilterMode="FilterMode.Advanced" IsLoading=isLoading>
+                    <Columns>
+                        <RadzenDataGridColumn TItem="User" Property="User.Image" Title="Imagen" Filterable=false Width="120px" Frozen=true>
+                            <Template Context="image">
+                                <img src="@image.Image" class="rz-gravatar" />
+                            </Template>
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="User" Property="User.Username" Title="Usuario" />
+                        <RadzenDataGridColumn TItem="User" Property="User.Name" Title="Nombre" />
+                        <RadzenDataGridColumn TItem="User" Property="User.Lastname" Title="Apellido" />
+                        <RadzenDataGridColumn TItem="User" Property="User.Email" Title="Correo" />
+                        <RadzenDataGridColumn TItem="User" Property="User.PhoneNumber" Title="Teléfono" />
+                        <RadzenDataGridColumn TItem="User" Property="User" Title="Acción" Width="150px;">
+                            <Template Context="action">
+                                <RadzenButton Click=@(()=>EditUser(action)) Icon="@(Icons.SetIcon("fa-edit"))" ButtonStyle="ButtonStyle.Info" />
+                                <RadzenButton Click=@(()=>DeleteUser(action)) Icon="@(Icons.SetIcon("fa-trash"))" ButtonStyle="ButtonStyle.Danger" />
+                            </Template>
+                        </RadzenDataGridColumn>
+                    </Columns>
+                </RadzenDataGrid>
+            </div>
+        </div>
+    </div>
+</div>
