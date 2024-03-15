@@ -1,5 +1,6 @@
 using GeneralApp.Models;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using Radzen;
 using Radzen.Blazor;
 using System.Diagnostics;
@@ -38,7 +39,7 @@ namespace GeneralApp.Components.Pages.Usuarios
 
         public async Task DeleteUser(User user)
         {
-            var confirm = await DialogService.Confirm("¿Está seguro de que desea eliminar el usuario?", "Eliminar", new ConfirmOptions() { OkButtonText="Si", CancelButtonText="No" });
+            var confirm = await DialogService.Confirm("Â¿EstÃ¡ seguro de que desea eliminar el usuario?", "Eliminar", new ConfirmOptions() { OkButtonText="Si", CancelButtonText="No" });
             if (confirm.Value == true)
             {
                 bool request = await userRepo.DeleteUser(user);
@@ -48,9 +49,13 @@ namespace GeneralApp.Components.Pages.Usuarios
                 }
                 else
                 {
-                    await DialogService.Alert("Hay un error al eliminar el usuario, intente más tarde", "Eliminar");
+                    await DialogService.Alert("Hay un error al eliminar el usuario, intente mï¿½s tarde", "Eliminar");
                 }
             }
+        }
+
+        public async Task ChangeImage(InputFileChangeEventArgs arg){
+            //
         }
     }
 }

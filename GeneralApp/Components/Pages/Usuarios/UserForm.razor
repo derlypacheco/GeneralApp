@@ -3,6 +3,23 @@
 @inject Radzen.DialogService DialogService
 
 <EditForm Model="user">
+
+    <div class="row">
+        @if(!string.IsNullOrEmpty(@user.Image)){
+        <div class="col my-2">
+            <RadzenStack AlignItems="AlignItems.Center" Class="rz-mx-auto rz-my-12">
+                <RadzenImage Path="@user.Image" Style="width: 15rem;" AlternateText="community" />
+            </RadzenStack>
+        </div> 
+        }
+    </div>
+
+    <div class="row">
+        <div class="col  text-center">
+            <RadzenFileInput @bind-Value=@user.Image TValue="string" />
+        </div>
+    </div>
+
     <div class="row">
         <div class="col my-2">
             <label class="form-label">Nombre</label>
@@ -64,7 +81,7 @@
         if (!String.IsNullOrEmpty(Password))
         {
             user.Password = Password;
-            // Llamar al metodo de encriptar 
+            // Llamar al metodo de encriptar
             // code...
         }
         // Procedimiento para almacenar el usuario
